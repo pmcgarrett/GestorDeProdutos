@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Criar Empregados</title>
+    </h:head>
+    <h:body>
+         <h:form>
+             <p:messages id="msgs" autoUpdate="true" globalOnly="true" showDetail="true">
+                 <p:effect type="fade" event="load" delay="1500" />
+             </p:messages>
+            <p:panel header="Criar novo Empregado" >
+                <h:panelGrid id="grid" columns="3" cellpadding="5" >
+                    <p:outputLabel for="nome" value="Nome do Empregado: " />
+                    <p:inputText id="nome" value="#{empregadosController.empregadoEdit.nomeDoEmpregado}"  required="true" requiredMessage="Empregado tem que ter um nome"/>
+                    <p:message for="nome"/>
+                    
+                    <p:outputLabel for="user" value="Utilizador: " />
+                    <p:inputText id="user" value="#{empregadosController.empregadoEdit.userName}" required="true" requiredMessage="Utlizador não pode estar vazio"/>
+                    <p:message for="user"/>
+                    
+                    <p:outputLabel for="pass" value="Palavra-passe: " />
+                    <p:inputText id="pass" value="#{empregadosController.empregadoEdit.password}" required="true" requiredMessage="Palavra-passe não pode estar vazia"/>
+                    <p:message for="pass"/>                    
+                   
+                    <p:commandButton  value="Voltar" action="gerirEmpregados.xhtml?faces-redirect=true" immediate="true"/>
+                    <p:commandButton id="submitButton" value="Criar" action="#{empregadosController.criarEmpregado()}" update="grid" />            
+                </h:panelGrid>
+            </p:panel>            
+        </h:form>
+    </h:body>
+</html>
+

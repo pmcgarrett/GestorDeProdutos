@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Produtos</title>
+    </h:head>
+    <h:body>
+        <h:form  id="form">
+            <p:panel header="Produtos" >
+                <p:dataTable value="#{produtosController.getTodosProdutosDesteEmpregado(empregadosController.idEmpregado)}" var="temp" style="margin: 2em;width:400px;" rowKey="#{temp.idProduto}">
+                    <p:column headerText="Nome">
+                        <h:outputText value="#{temp.nomeDoProduto}"/>
+                    </p:column>
+
+                    <p:column headerText="Opções" style="width:200px;text-align: center">
+                        <p:commandButton value="Editar" action="gerirProdutos" update=":form:proEdit" onclick="PF('editDialog').show();" >
+                            <f:setPropertyActionListener value="#{temp}" target="#{produtosController.produtoEdit}"/>
+                        </p:commandButton>
+
+
+                        <p:commandButton value="Eliminar" action="#{produtosController.eliminarProduto(temp)}" >
+                            <p:confirm header="Confirmação" message="Deseja eliminar este produto?" icon="ui-icon-blank" />
+                        </p:commandButton>
+                    </p:column>
+
+                </p:dataTable>
+                <h:panelGrid id="grid" columns="2"  cellpadding="5" >
+                    <p:commandButton  value="Voltar" action="areaTrabalho.xhtml?faces-redirect=true" />
+                    <p:commandButton  value="Novo Produto" action="#{produtosController.paginaCriarProduto()}" />
+                </h:panelGrid>
+
+                <p:dialog header="Editar Produto" widgetVar="editDialog" modal="true" resizable="false" >
+                    <p:messages id="msgs" autoUpdate="true" globalOnly="true" showDetail="true"/>
+                    <p:outputPanel id="proEdit" style="text-align:center;">
+                        <p:panelGrid  columns="2" rendered="#{not empty produtosController.produtoEdit}" columnClasses="label,value" >
+                            <h:outputText value="Nome do produto: " />
+                            <p:inputText value="#{produtosController.produtoEdit.nomeDoProduto}" />
+                        </p:panelGrid>
+                        <h:panelGrid  columns="2"  cellpadding="5" >
+                            <p:commandButton value="Editar" action="#{produtosController.editarProduto()}"/>
+                            <p:commandButton value="Cancelar" action="gerirProdutos.xhtml?faces-redirect=true"/>
+                        </h:panelGrid>
+                    </p:outputPanel>
+                </p:dialog>
+
+                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  >                    
+                    <p:commandButton value="Sim"  styleClass="ui-confirmdialog-yes"  />
+                    <p:commandButton value="Não"  styleClass="ui-confirmdialog-no"  />
+                </p:confirmDialog>
+            </p:panel>
+        </h:form>
+    </h:body>
+</html>
+

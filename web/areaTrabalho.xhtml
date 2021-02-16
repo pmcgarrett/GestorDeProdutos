@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Area de Trabalho</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="north" size="55" resizable="true" closable="true" collapsible="true">
+                    
+                    <p:outputLabel value="Bem-vindo(a) #{empregadosController.nomeDoEmpregado}" style="font-size: 120%"/>
+                    <p:commandButton  value="Encerrar Sessão" action="home.xhtml?faces-redirect=true" style="float:right;"/>
+                </p:layoutUnit>              
+
+                <p:layoutUnit position="west" size="175" header="Opções" collapsible="true">
+                    <p:menu >
+                        <p:menuitem value="Todos os Produtos" url="faces/todosOsProdutos.xhtml" />    
+                        <p:menuitem value="Área Pessoal" url="faces/areaPessoal.xhtml" />
+                        <p:menuitem value="Gerir Produtos" url="faces/gerirProdutos.xhtml" />
+                        <p:menuitem value="Gerir Categorias" url="faces/gerirCategorias.xhtml" />
+                        <p:menuitem value="Gerir Faturas" url="faces/gerirFaturas.xhtml" />
+                    </p:menu>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+                    <h:form  id="form">
+                        <p:panel header="O meus produtos">
+                            <p:dataTable value="#{categoriaController.getTodasCategoriasDesteEmpregado(empregadosController.idEmpregado)}" var="temp" style="margin: 2em;" rowKey="#{temp.idcategoria}">
+
+                            <p:column headerText="produto">
+                                <h:outputText value="#{temp.produtosidProduto.nomeDoProduto}"/>
+                            </p:column>
+                            <p:column headerText="categoria">
+                                <h:outputText value="#{temp.nomeDaCategoria}"/>
+                            </p:column>
+                        </p:dataTable>
+                            </p:panel>
+                    </h:form>
+                </p:layoutUnit>
+
+            </p:layout>
+
+        </h:body>
+
+    </f:view>
+</html>
+

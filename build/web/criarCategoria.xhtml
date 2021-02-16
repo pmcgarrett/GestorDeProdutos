@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Criar Categorias</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:messages id="msgs" autoUpdate="true" globalOnly="true" showDetail="true">
+                <p:effect type="fade" event="load" delay="1500" />
+            </p:messages>
+            <p:panel header="Criar uma nova Categoria" >                
+                <h:panelGrid id="grid" columns="3" cellpadding="5" >
+                    <p:outputLabel for="categoria" value="Categoria:" />
+                    <p:inputText id="categoria" value="#{categoriaController.categoriaEdit.nomeDaCategoria}" required="true" requiredMessage="Categoria tem que ter um nome"/>
+                    <p:message for="categoria"/>
+
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <p:commandButton  value="Voltar" action="gerirCategoriasSegundaPagina.xhtml?faces-redirect=true" immediate="true"/>
+                        <p:commandButton id="submitButton" value="Criar" action="#{categoriaController.criarCategoria(produtosController.produtoEdit)}" update="grid" />            
+                    </h:panelGrid>
+                </h:panelGrid>
+            </p:panel>            
+        </h:form>
+    </h:body>
+</html>
+
